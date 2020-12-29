@@ -138,43 +138,46 @@ fin_programme_f1:
         syscall
         
         #calcule et affichage nbr pages
-        la $a0,nbr_de_pages		#affiche messahe page
+        la $a0,nbr_de_pages		#affiche message pages
     	ori $v0,$zero,4
         syscall
         
-        la $t6,tab_resultat_f2		#div de nbr de ligne pour trouver le nombre de page
+        la $t6,tab_resultat_f2		#div de nbr de ligne pour trouver le nombre de page aroundi
         lw $t6,4($t6)
         la $t7,nbr_lignes_dans_page
         lw $t7,0($t7)
         div $t6,$t7
         mflo $t5
         
-        addi $t4,$t4,10
+        lui $t4,10			#multiplier par 10 le nombre de ligne
         mult $t4,$t6
         mflo $t3
         
-        div $t3,$t7
+        div $t3,$t7			#puis diviser par le nombre de lignes par page 
         mflo $t3
         
-        mult $t5,$t4
+        mult $t5,$t4			# multiplier le nombre de page arondi par 10
         mflo $t4
                 
-        beq $t4,$t3,fin_page_plus_zero
+        beq $t4,$t3,fin_page_plus_zero	#comparer les deux valeurs equivalent a voir si la division a un reste
   
-        addi $a0,$t5,1			#afficher nbr pages
+        addi $a0,$t5,1			#afficher nbr pages +1 si il ya un reste 
 	ori $v0,$zero,1
 	syscall
         
 	j fin_f_page
 	
 fin_page_plus_zero:
-	addi $a0,$t5,0			#afficher nbr pages
+	addi $a0,$t5,0			#afficher nbr pages normalement si pas de reste
 	ori $v0,$zero,1
 	syscall
 	
 	j fin_f_page
 	
 fin_f_page:
+
+
+
 
 	lw $ra,8($sp)			#EPILOGUE
 	lw $fp,4($sp)
