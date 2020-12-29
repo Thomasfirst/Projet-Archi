@@ -3,7 +3,7 @@ erreur_ouverture_fichier:	.asciiz "erreur ouverture fichier\n"
 success_ouverture_fichier:	.asciiz "succès ouverture fichier\n"
 chemin_texte:                	.asciiz "/home/polytech/Téléchargements/Projet_Archi/Marseillaise.txt"
 buffer:				.space 1
-#tab_resultat:			.space 8
+tab_resultat_f2:		.word 0
 
     .text
 main:
@@ -24,7 +24,7 @@ main:
    	ori $v0,$zero,4				# 4 affichage texte
         syscall
         
-        #la $t6,tab_resultat
+        la $t6,tab_resultat_f2			# chargement du tableau pour resultat
         
         
         jal f1_lecture_caractere 		# appel fonction
@@ -79,17 +79,21 @@ f1_lecture_caractere:  			#lecture du fichier caractère par caractère
         
         j lecture_caractere_f1 		#on refait un tour de boucle
 	
-	fin_programme_f1:		#EPILOGUE
-	
-	ori $a0,$s1,0
+	fin_programme_f1:		
+		
+	ori $a0,$s1,0			#affichage résultat f2
 	ori $v0,$zero,1
 	syscall
 	
-	lw $ra,8($sp)
+	lw $t6,0($t6)			# affichage du tab_resultat
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall
+	
+
+	lw $ra,8($sp)			#EPILOGUE
 	lw $fp,4($sp)
 	addu $sp,$sp,12
-	
-	
 	
 	jr $ra
 
@@ -115,7 +119,7 @@ f2_compteur_phrase:
 	fin_programme_f2:		#EPILOGUE
 	lw $fp,4($sp)
 	addu $sp,$sp,8
-	
-	#sw $s1,0($t6)
+
+	sw $s1,0($t6)			# on écrit dans le tab_resultat
 	
 	jr $ra
