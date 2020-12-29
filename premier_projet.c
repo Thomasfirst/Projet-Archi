@@ -19,7 +19,7 @@ int main()
     int TempPage = 0;
 
 
-    fichier = fopen("Marseillaise.txt", "r");
+    fichier = fopen("test.txt", "r");
 
     if (fichier != NULL)
     {
@@ -49,7 +49,7 @@ int main()
             {
                 if ((caractereActuel=='\n'))
                 {
-                    if ((lastCaracter!='?')&&(lastCaracter!='!')&&(lastCaracter!='\n'))
+                    if ((lastCaracter!='?')&&(lastCaracter!='!')&&(lastCaracter!='\n')&&(lastCaracter!='.')&&(lastCaracter!=',')&&(lastCaracter!=';'))
                                                             //attention quand on saute une ligne ne pas confondre le dernier caratere
                     {
                         NbMots+=1;
@@ -60,7 +60,7 @@ int main()
                     NbMots+=1;
                 }
             }
-            //printf("%c ---mot %d\n", caractereActuel,NbMots);
+            printf("%c ---mot %d\n", caractereActuel,NbMots);
 
             lastCaracter=caractereActuel;
 
