@@ -236,6 +236,7 @@ int main(int argc, char const *argv[])
         min=999;
 
         temp_int=0;
+        existe=0;
         
     }
     
