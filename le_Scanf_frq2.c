@@ -187,11 +187,12 @@ int main(int argc, char const *argv[])
 	    //fscanf(fichier,"%s",temp);
         for (int i2 = 0; i2 < 28; ++i2)
         {
-         temp[i2]=0;
+            temp[i2]=0;
         }
 
         loop=0;
         lastcaratere=fgetc(fichier);
+
         for (int i = 0; i < 4; ++i)
         {
             if ((lastcaratere=='.')||(lastcaratere=='!')||(lastcaratere=='?')||(lastcaratere==' ')||(lastcaratere=='\n')||(lastcaratere==','))
