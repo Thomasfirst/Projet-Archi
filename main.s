@@ -358,20 +358,24 @@ f7_frequence_mot:
 	#2ème for = initialisation de temp
 	la $t6,temp				# chargement du tableau temp
 	ori $t1,$zero,0				# initialisation i alias i2 (code C)
-	addi $t5,$zero,28			# nb éléments de temp
+	addi $t5,$zero,28			# nb éléments de temp = 28
 	addi $t2,$zero,4			# valeur 4
 	
 	initialisation_temp_f7:
+	bge $t1,$t5,fin_initialisation_temp_f7
 	mul $t3,$t2,$t1				# 4*i
 	add $t4,$t6,$t3				# récupère adresse temp[i]
 	lw $t4,0($t4)				# récupère valeur de l'adresse temp[i]
-	ori $t4,$zero,0
+	ori $t4,$zero,0				# initialisation à zéro
 	
 	
+	addi $t1,$t1,1				# incrémentation 2ème for init temp
+	j initialisation_temp_f7		# retour 2ème for alias	
 	
+	fin_initialisation_temp_f7:		# fin initialisation temp
 	
 	addi $t0,$t0,1				# incrémentation 1er for
-	j grand_tour_f7				# retour sur le 1er if alis grand_tour
+	j grand_tour_f7				# retour sur le 1er for alias grand_tour
 	fin_programme_f7:
 	### printf
 	lw $fp,4($sp)				# epilogue
