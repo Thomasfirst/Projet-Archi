@@ -276,19 +276,30 @@ int main(int argc, char const *argv[])
 
 
 
-        for (int j = 0; j < 10; ++j)
-        {
-            if (TabInt[j] < min )	//on cherche celui qui est le moins present pour le remplacer
-            {
-                min = TabInt[j];
-                indiceMin = j;
-            }
+        // for (int j = 0; j < 10; ++j)
+        // {
+        //     if (TabInt[j] < min )	//on cherche celui qui est le moins present pour le remplacer
+        //     {
+        //         min = TabInt[j];
+        //         indiceMin = j;
+        //     }
 
-            // if (strcmp( temp, TabChar[j] ) == 0) //on cherche si il est present
-            // {
-            // 	existe=1;	
-            // }
-        }
+        //     if (strcmp( temp, TabChar[j] ) == 0) //on cherche si il est present
+        //     {
+        //     	existe=1;	
+        //     }
+        // }
+        // if ((existe==0)&&(TabInt[indiceMin] < temp_int))
+        // {   
+        //     strcpy(TabChar[indiceMin],temp);//on le mes dans le tableeau
+        //     TabInt[indiceMin] = temp_int;
+        // }
+
+        // min=999;
+
+        // temp_int=0;
+        // existe=0;
+
 //-----------
             comp=0;//comparaison
             for (int i = 0; i < 28; ++i)
@@ -411,17 +422,97 @@ int main(int argc, char const *argv[])
                 existe=1;
             }
 //--------------
+            for (int j = 0; j < 10; ++j)
+            {
+                if (TabInt[j] < min )    //on cherche celui qui est le moins present pour le remplacer
+                {
+                    min = TabInt[j];
+                    indiceMin = j;
+                }
+            }
+//--------------
+            if ((existe==0)&&(TabInt[indiceMin] < temp_int))
+            {   
+                //strcpy(TabChar[indiceMin],temp);//on le mes dans le tableeau
+                if (indiceMin==0)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp0[it]=temp[it];
+                    }
+                }
+                if (indiceMin==1)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp1[it]=temp[it];
+                    }
+                }
+                if (indiceMin==2)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp2[it]=temp[it];
+                    }
+                }
+                if (indiceMin==3)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp3[it]=temp[it];
+                    }
+                }
+                if (indiceMin==4)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp4[it]=temp[it];
+                    }
+                }
+                if (indiceMin==5)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp5[it]=temp[it];
+                    }
+                }
+                if (indiceMin==6)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp6[it]=temp[it];
+                    }
+                }
+                if (indiceMin==7)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp7[it]=temp[it];
+                    }
+                }
+                if (indiceMin==8)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp8[it]=temp[it];
+                    }
+                }
+                if (indiceMin==9)
+                {
+                    for (int it = 0; it < 28; ++it)
+                    {
+                        temp9[it]=temp[it];
+                    }
+                }
+                TabInt[indiceMin] = temp_int;
+            }
 
-        if ((existe==0)&&(TabInt[indiceMin] < temp_int))
-        {   
-        	strcpy(TabChar[indiceMin],temp);//on le mes dans le tableeau
-         	TabInt[indiceMin] = temp_int;
-        }
+            min=999;
 
-        min=999;
+            temp_int=0;
+            existe=0;
+//----------------------
 
-        temp_int=0;
-        existe=0;
         
     }
     
