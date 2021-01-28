@@ -1,16 +1,45 @@
 	.data
 erreur_ouverture_fichier:	.asciiz "erreur ouverture fichier\n"
+erreur_ouverture_fichier2:	.asciiz "\nerreur ouverture fichier partie 2\n"
 success_ouverture_fichier:	.asciiz "succès ouverture fichier\n"
+success_ouverture_fichier2:	.asciiz "\nsuccès ouverture fichier partie 2\n"
 nbr_de_phrases:			.asciiz "le nombre de phrase est: "
 nbr_mots:			.asciiz "le nombre de mot est: "
 nbr_de_lignes:			.asciiz "le nombre de lignes est: "
 nbr_de_pages:			.asciiz "le nombre de pages est: "
 nbr_lignes_dans_page:		.word 6
 
-chemin_texte:                	.asciiz "/home/polytech/Téléchargements/Projet_Archi/Marseillaise.txt"
+chemin_texte:                	.asciiz "/home/polytech/Téléchargements/Projet_Archi_final/Marseillaise.txt"
+chemin_texte2:                	.asciiz "/home/polytech/Téléchargements/Projet_Archi_final/Marseillaise.txt"
 buffer:				.space 1
 tab_resultat_fonction:		.word 0,0,0,0
 
+#variables fonction fréquence mot
+caractereActuel:		.word 0
+lastcaratere:			.word 0
+loop:				.word 0
+#nombre de répétitons des mots les plus fréquents associés à leur position dans TabChar
+TabInt:				.word 0,0,0,0,0,0,0,0,0,0
+#tableau de taille 28 pour sauvegarder les mots les plus fréquents
+temp0			:	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp1:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp2:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp3:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp4:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp5:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp6:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp7:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp8:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp9:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+#char* TabChar[10] = {temp0,temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8,temp9};
+temp:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp_char:			.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp_int:			.word 0
+#tour:				.word 0
+existe:				.word 0
+min:				.word 999
+indiceMin:			.word 0
+comp:				.word 0
     .text
 main:
 	subu $sp,$sp,8    			# prologue
@@ -22,10 +51,10 @@ main:
         li  $a1,0        	 		# lecture = 0 (flag)
         li  $a2,0        	 		# = 0 (mode : reading from standard input)
         syscall        		 		# ouverture du fichier
-	move $s6, $v0      			# adresse fichier 
+	move $s6, $v0      			# sauvegarde adresse fichier 
 	
         # erreur d'ouverture du fichier si $vo est négatif
-        bltz $v0,erreur_ouverture 		# redirection fin du programme
+        bltz $v0,erreur_ouverture_part1		# redirection fin du programme
         la $a0,success_ouverture_fichier	# affichage du texte
    	ori $v0,$zero,4				
         syscall
@@ -36,21 +65,53 @@ main:
         
         jal f1_lecture_caractere 		# appel fonction 
   
-        lw $fp,4($sp)				# fin de l'appel de la fonction main
-	addu $sp,$sp,8
-	
-        j fin_programme
 
-erreur_ouverture:	
+        j fin_programme_part1
+
+	erreur_ouverture_part1:	
 	la $a0,erreur_ouverture_fichier		# affichage du texte
 	ori $v0,$zero,4				
         syscall
 
-fin_programme:
+	fin_programme_part1:
 	li   $v0, 16       			# syscall pour fermer le fichier
   	move $a0, $s6      			# adresse fichier dans $a0 pour fermeture
   	syscall            			# fermeture
+  	
+  	
+	# On répète la procédure d'ouverture et de fermeture du fichier afin de lancer la fonction fréquence mot  	
+  	li  $v0, 13            	 		# syscall pour l'ouverture du fichier
+        la  $a0,chemin_texte2  			# chemin du fichier
+        li  $a1,0        	 		# lecture = 0 (flag)
+        li  $a2,0        	 		# = 0 (mode : reading from standard input)
+        syscall        		 		# ouverture du fichier
+	move $s6, $v0      			# sauvegarde adresse fichier 
+	
+        # erreur d'ouverture du fichier si $vo est négatif
+        bltz $v0,erreur_ouverture_part2		# redirection fin du programme
+        la $a0,success_ouverture_fichier2	# affichage du texte
+   	ori $v0,$zero,4				
+        syscall
+        
+        jal f7_frequence_mot
 
+        
+        j fin_programme_part2
+
+	erreur_ouverture_part2:	
+	la $a0,erreur_ouverture_fichier2	# affichage du texte
+	ori $v0,$zero,4				
+        syscall
+
+	fin_programme_part2:
+	li   $v0, 16       			# syscall pour fermer le fichier
+  	move $a0, $s6      			# adresse fichier dans $a0 pour fermeture
+  	syscall            			# fermeture
+  	
+
+	lw $fp,4($sp)				# fin de l'appel de la fonction main
+	addu $sp,$sp,8
+	
         ori $v0,$zero,10			# sortie du programme
         syscall
         
@@ -76,7 +137,7 @@ f1_lecture_caractere:  				# lecture du fichier caractère par caractère
         jal f2_compteur_phrase			
         jal f3_compteur_mot			
         jal f4_compteur_ligne
-
+	
         ori $a0,$a1,0				# affichage du caractère
         ori $v0,$zero,4
         syscall
@@ -86,7 +147,7 @@ f1_lecture_caractere:  				# lecture du fichier caractère par caractère
 	fin_programme_f1:	
 		
 	jal f5_compteur_page	
-	jal fn_affichage_resultat
+	jal f6_affichage_resultat
 	
 	lw $ra,8($sp)				# epilogue
 	lw $fp,4($sp)
@@ -216,7 +277,7 @@ f5_compteur_page:
 	sw $t4,12($t6)				# on écrit dans le tab_resultat	
 	jr $ra
 		
-fn_affichage_resultat:
+f6_affichage_resultat:
 	subu $sp,$sp,8   			# prologue
 	sw $fp,4($sp)
 	addu $fp,$sp,8
@@ -229,8 +290,8 @@ fn_affichage_resultat:
     	ori $v0,$zero,4
         syscall
         
-	lw $s6,0($t6)				# affichage du tab_resultat 1
-	ori $a0,$s6,0
+	lw $s3,0($t6)				# affichage du tab_resultat 1
+	ori $a0,$s3,0
 	ori $v0,$zero,1
 	syscall
 	
@@ -243,8 +304,8 @@ fn_affichage_resultat:
         syscall
         
       
-	lw $s6,4($t6)				# affichage du tab_resultat 2
-	ori $a0,$s6,0
+	lw $s3,4($t6)				# affichage du tab_resultat 2
+	ori $a0,$s3,0
 	ori $v0,$zero,1
 	syscall
 	
@@ -257,8 +318,8 @@ fn_affichage_resultat:
         syscall
 	
 	
-	lw $s6,8($t6)				# affichage du tab_resultat 3
-	ori $a0,$s6,0
+	lw $s3,8($t6)				# affichage du tab_resultat 3
+	ori $a0,$s3,0
 	ori $v0,$zero,1
 	syscall
 	
@@ -271,13 +332,48 @@ fn_affichage_resultat:
         la $a0,nbr_de_pages			#affiche message pages
     	ori $v0,$zero,4
         syscall
-	
-	lw $s6,12($t6)				# affichage du tab_resultat 4
-	ori $a0,$s6,0
+
+	lw $s3,12($t6)				# affichage du tab_resultat 4
+	ori $a0,$s3,0
 	ori $v0,$zero,1
 	syscall
 
 
+	lw $fp,4($sp)				# epilogue
+	addu $sp,$sp,8
+	jr $ra
+
+f7_frequence_mot:
+	subu $sp,$sp,8   			# prologue
+	sw $fp,4($sp)
+	addu $fp,$sp,8
+	
+	la $t7,tab_resultat_fonction		# chargement nb mots texte
+	lw $t7,4($t7)
+	ori $t0,$zero,0				# initialisation i alias big (code C)
+	#1er for
+	grand_tour_f7:
+	bge $t0,$t7,fin_programme_f7
+	
+	#2ème for = initialisation de temp
+	la $t6,temp				# chargement du tableau temp
+	ori $t1,$zero,0				# initialisation i alias i2 (code C)
+	addi $t5,$zero,28			# nb éléments de temp
+	addi $t2,$zero,4			# valeur 4
+	
+	initialisation_temp_f7:
+	mul $t3,$t2,$t1				# 4*i
+	add $t4,$t6,$t3				# récupère adresse temp[i]
+	lw $t4,0($t4)				# récupère valeur de l'adresse temp[i]
+	ori $t4,$zero,0
+	
+	
+	
+	
+	addi $t0,$t0,1				# incrémentation 1er for
+	j grand_tour_f7				# retour sur le 1er if alis grand_tour
+	fin_programme_f7:
+	### printf
 	lw $fp,4($sp)				# epilogue
 	addu $sp,$sp,8
 	jr $ra
