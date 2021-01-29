@@ -53,7 +53,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp0:
 	bge $t1,$t2,fin_comparaison_temp_temp0		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp0[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -65,6 +64,7 @@ main:
 	
 	fin_if_temp_temp0:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp0		# retour au bebut de la boucle
 	
@@ -91,7 +91,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp1:
 	bge $t1,$t2,fin_comparaison_temp_temp1		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp1[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -103,6 +102,7 @@ main:
 	
 	fin_if_temp_temp1:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp1		# retour au bebut de la boucle
 	
@@ -130,7 +130,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp2:
 	bge $t1,$t2,fin_comparaison_temp_temp2		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp2[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -142,6 +141,7 @@ main:
 	
 	fin_if_temp_temp2:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp2		# retour au bebut de la boucle
 	
@@ -170,7 +170,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp3:
 	bge $t1,$t2,fin_comparaison_temp_temp3		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp3[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -182,6 +181,7 @@ main:
 	
 	fin_if_temp_temp3:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp3		# retour au bebut de la boucle
 	
@@ -209,7 +209,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp4:
 	bge $t1,$t2,fin_comparaison_temp_temp4		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp3[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -221,6 +220,7 @@ main:
 	
 	fin_if_temp_temp4:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp4		# retour au bebut de la boucle
 	
@@ -249,9 +249,8 @@ main:
 	#debut boucle 
 	comparaison_temp_temp5:
 	bge $t1,$t2,fin_comparaison_temp_temp5		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
-	add $t7,$t5,$t3				# récupère adresse temp5[i]
+	add $t7,$t5,$t3				# récupère adresse temp5[i] (╭ರ_•́)
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
 	lw $t7,0($t7)				# récupère valeur de l'adresse temp5[i]
 	
@@ -261,6 +260,7 @@ main:
 	
 	fin_if_temp_temp5:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp5		# retour au bebut de la boucle
 	
@@ -289,7 +289,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp6:
 	bge $t1,$t2,fin_comparaison_temp_temp6		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp6[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -301,6 +300,7 @@ main:
 	
 	fin_if_temp_temp6:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp6		# retour au bebut de la boucle
 	
@@ -329,7 +329,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp7:
 	bge $t1,$t2,fin_comparaison_temp_temp7		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp3[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -341,6 +340,7 @@ main:
 	
 	fin_if_temp_temp7:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp7		# retour au bebut de la boucle
 	
@@ -369,7 +369,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp8:
 	bge $t1,$t2,fin_comparaison_temp_temp8		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp3[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -381,6 +380,7 @@ main:
 	
 	fin_if_temp_temp8:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp8		# retour au bebut de la boucle
 	
@@ -410,7 +410,6 @@ main:
 	#debut boucle 
 	comparaison_temp_temp9:
 	bge $t1,$t2,fin_comparaison_temp_temp9		# fin boucle i=28
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t4,$t3				# récupère adresse temp[i]
 	add $t7,$t5,$t3				# récupère adresse temp9[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
@@ -422,6 +421,7 @@ main:
 	
 	fin_if_temp_temp9:
 	
+	addi $t3,$t3,4				# 4*i
 	addi $t1,$t1,1				# incrémentation i +1
 	j comparaison_temp_temp9		# retour au bebut de la boucle
 	
@@ -442,36 +442,388 @@ main:
 	
 	
 	#---- on cherche le mot le moins present du tableau
+	#boucle de 28
 	ori $t1,$zero,0				# initialisation i 
 	addi $t2,$zero,10			# jusqua 10
 	addi $t3,$zero,0			# 0 puis de 4 en 4
 	la $t4,min				# chargement entier min
-	lw $t4,0($t4)				# chargement valeur min
+	lw $t8,0($t4)				# chargement valeur min
 	la $t5,TabInt				# chargement adresse tabint
 	la $t7,indiceMin			# chargement adresse indicemin
-	lw $t7,0($t7)				# chargement valeur indicemin
+	lw $t9,0($t7)				# chargement valeur indicemin
 	
 	
 	#debut boucle 
 	boucle_min:
 	bge $t1,$t2,fin_boucle_min		# fin boucle i=10
-	addi $t3,$t3,4				# 4*i
 	add $t6,$t5,$t3				# récupère adresse tabint[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse tabint[i]
 	
-	#if TabInt[j] < min 
-	bge $t4,$t6,fin_if_min			# min>tabint[i] on sort
-	addi $t4,$zero,$t6			# min=tabint[i]
-	sw $t4,0($t4)				# sauvegarde min=tabint[i]
-	addi $t7,$zero,$t1			# indiceMin = i
-	sw $t7,0($t7)				# sauvegarde indiceMin = i
+	#if TabInt[i] < min 
+	bge $t8,$t6,fin_if_min			# min>tabint[i] on sort
+	addi $t8,$zero,$t6			# min=tabint[i]
+	sw $t8,0($t4)				# sauvegarde min=tabint[i]
+	addi $t9,$zero,$t1			# indiceMin = i
+	sw $t9,0($t7)				# sauvegarde indiceMin = i
 	
 	fin_if_min:
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_min				# retour au bebut de la boucle
 	
 	fin_boucle_min:
 	#fin de recherche le mot le moins present du tableau
 	
+	
+	
 	#----------------
+	
+	
+	# Si le mot n existe pas on et est en nombre superieur nombre de mots min on le remplace
+	la $t0,existe				# charge l'adresse de existe
+	lw $t0,0($t0)				# charge la valeur de existe
+	la $t1,indiceMin			# charge l'adresse de indicemin
+	lw $t1,0($t1)				# charge la valeur de indicemin
+	la $t2,TabInt				# charge l'adresse de tabint
+	#lw $t2,0($t2)				# charge la valeur de tabint
+	la $t3,temp_int				# charge l'adresse de tempint
+	lw $t3,0($t3)				# charge la valeur de tempint
+	
+	# if existe == 1 on saute
+	ori $t4,$zero,1				# on prend la valeur 1
+	bne $t0,$t4,fin_if_mot_existant
+	
+	# if TabInt[indiceMin] < temp_int
+	add $t2,$t2,$t1				# on creer l'adresse TabInt[indiceMin]
+	lw $t2,0($t2)				# charge la valeur de TabInt[indiceMin] ¯\_(ツ)_/¯
+	bne $t2,$t3,fin_if_mot_existant		# si TabInt[indiceMin] > tempint on saute a la fin
+	
+	
+	
+	
+	# on fix indice a $t0 pour ne pas avoir a le redemander
+	la $t0,indiceMin			# charge l'adresse de indicemin
+	lw $t0,0($t1)				# charge la valeur de indicemin
+	
+		#--
+		# if indiceMin==0
+	ori $t4,$zero,0				# on prend la valeur 0
+	bne $t0,$t4,suivant_indiceMin1		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp0				# chargement du tableau temp0
+	
+	#debut boucle 
+	boucle_indicemin0:
+	bge $t1,$t2,fin_boucle_indicemin0	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp0[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp0[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin0			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin0:			# fin initialisation temp  	
+	
+	suivant_indiceMin1:
+	
+		#--
+		# if indiceMin==1
+	ori $t4,$zero,1				# on prend la valeur 1
+	bne $t0,$t4,suivant_indiceMin2		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp1				# chargement du tableau temp0
+	
+	#debut boucle 
+	boucle_indicemin1:
+	bge $t1,$t2,fin_boucle_indicemin1	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp1[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin1			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin1:			# fin initialisation temp  	
+	
+	suivant_indiceMin2:
+	
+		#--
+		# if indiceMin==2
+	ori $t4,$zero,2				# on prend la valeur 2
+	bne $t0,$t4,suivant_indiceMin3		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp2				# chargement du tableau temp2
+	
+	#debut boucle 
+	boucle_indicemin2:
+	bge $t1,$t2,fin_boucle_indicemin2	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp2[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin2			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin2:			# fin initialisation temp  	
+	
+	suivant_indiceMin3:
+	
+		#--
+		# if indiceMin==3
+	ori $t4,$zero,3				# on prend la valeur 3
+	bne $t0,$t4,suivant_indiceMin4		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp3				# chargement du tableau temp3
+	
+	#debut boucle 
+	boucle_indicemin3:
+	bge $t1,$t2,fin_boucle_indicemin3	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp3[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin3			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin3:			# fin initialisation temp  	
+	
+	suivant_indiceMin4:
+	
+	
+		#--
+		# if indiceMin==4
+	ori $t4,$zero,4				# on prend la valeur 4
+	bne $t0,$t4,suivant_indiceMin5		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp4				# chargement du tableau temp4
+	
+	#debut boucle 
+	boucle_indicemin4:
+	bge $t1,$t2,fin_boucle_indicemin4	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp4[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin4			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin4:			# fin initialisation temp  	
+	
+	suivant_indiceMin5:
+	
+	
+		#--
+		# if indiceMin==5
+	ori $t4,$zero,5				# on prend la valeur 5
+	bne $t0,$t4,suivant_indiceMin6		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp5				# chargement du tableau temp5
+	
+	#debut boucle 
+	boucle_indicemin5:
+	bge $t1,$t2,fin_boucle_indicemin5	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp5[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin5			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin5:			# fin initialisation temp  	
+	
+	suivant_indiceMin6:
+	
+	
+		#--
+		# if indiceMin==6
+	ori $t4,$zero,6				# on prend la valeur 6
+	bne $t0,$t4,suivant_indiceMin7		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp6				# chargement du tableau temp6
+	
+	#debut boucle 
+	boucle_indicemin6:
+	bge $t1,$t2,fin_boucle_indicemin6	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp6[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin6			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin6:			# fin initialisation temp  	
+	
+	suivant_indiceMin7:
+	
+	
+	
+		#--
+		# if indiceMin==7
+	ori $t4,$zero,7				# on prend la valeur 7
+	bne $t0,$t4,suivant_indiceMin8		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp7				# chargement du tableau temp7
+	
+	#debut boucle 
+	boucle_indicemin7:
+	bge $t1,$t2,fin_boucle_indicemin7	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp7[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin7			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin7:			# fin initialisation temp  	
+	
+	suivant_indiceMin8:
+	
+	
+	
+		#--
+		# if indiceMin==8
+	ori $t4,$zero,8				# on prend la valeur 8
+	bne $t0,$t4,suivant_indiceMin9		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp8				# chargement du tableau temp8
+	
+	#debut boucle 
+	boucle_indicemin8:
+	bge $t1,$t2,fin_boucle_indicemin8	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp8[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin8			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin8:			# fin initialisation temp  	
+	
+	suivant_indiceMin9:
+	
+	
+	
+		#--
+		# if indiceMin==9
+	ori $t4,$zero,9				# on prend la valeur 8
+	bne $t0,$t4,suivant_fin		#on passe au prochain if
+	
+	#-------boucle de 28 charactere
+	ori $t1,$zero,0				# initialisation i 
+	addi $t2,$zero,28			# nb éléments de temp = 28
+	addi $t3,$zero,0			# 0 puis de 4 en 4
+	la $t4,temp				# chargement du tableau temp
+	la $t5,temp9				# chargement du tableau temp9
+	
+	#debut boucle 
+	boucle_indicemin9:
+	bge $t1,$t2,fin_boucle_indicemin9	# fin boucle i=28		
+	add $t6,$t4,$t3				# récupère adresse temp[i]			    
+	add $t7,$t5,$t3				# récupère adresse temp1[i]			    
+	lw $t6,0($t6)				# récupère valeur de l'adresse temp[i]
+	sw $t6,0($t7)				# stock la  valeur de temp[i] dans temp9[i]
+	
+	addi $t3,$t3,4				# 4*i
+	addi $t1,$t1,1				# incrémentation i +1
+	j boucle_indicemin9			# retour au bebut de la boucle
+	
+	fin_boucle_indicemin9:			# fin initialisation temp  	
+	
+	suivant_fin:
+	#on rempli avec le nombre de recurence du mot
+	la $t0,TabInt				# chargement adresse tabint , indicemin , temp_int
+	la $t1,indiceMin
+	la $t2,temp_int
+	
+	lw $t2,0($t2)				# charge la valeur de temp_int
+	lw $t1,0($t1)				# charge la valeur de indicemin
+	
+	ori $t3,$zero,4
+	mul $t1,$t1,$t3				#indicemin *4 pour avoir la position du nouveau mot
+	add $t0,$t0,$t1				# adresse de TabInt[indiceMin]
+	sw $t2,0($t0)				# on donne la valeur TabInt[indiceMin] = temp_int
+	
+	fin_if_mot_existant:
+	#fin de creation du mot dans le tableau
+	
+	#---- reinitialisation des variable
+	la $t0,min				# chargement adresse min , existe , temp_int
+	la $t1,existe
+	la $t2,temp_int
+	
+	ori $t3,$zero,999			#on va reinitialiser min a 999
+	sw $t3,0($t0)
+	
+	ori $t3,$zero,0			#on va reinitialiser existe a 0
+	sw $t3,0($t1)
+	
+	ori $t3,$zero,0			#on va reinitialiser temp_int a 0
+	sw $t3,0($t2)
+	
 	
 	
 	
