@@ -12,6 +12,7 @@ nbr_de_phrases:			.asciiz "le nombre de phrase est: "
 nbr_mots:			.asciiz "le nombre de mot est: "
 nbr_de_lignes:			.asciiz "le nombre de lignes est: "
 nbr_de_pages:			.asciiz "le nombre de pages est: "
+message_final:			.asciiz " fois le mot "
 nbr_lignes_dans_page:		.word 6
 
 chemin_texte:                	.asciiz "/home/polytech/Téléchargements/Projet_Archi_final/Marseillaise.txt"
@@ -26,7 +27,7 @@ loop:				.word 0
 #nombre de répétitons des mots les plus fréquents associés à leur position dans TabChar
 TabInt:				.word 0,0,0,0,0,0,0,0,0,0
 #tableau de taille 28 pour sauvegarder les mots les plus fréquents
-temp0			:	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+temp0:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 temp1:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 temp2:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 temp3:				.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -353,8 +354,9 @@ f7_frequence_mot:
 	
 	#ATTENTION $t0 et $t7 réservé, s7 et s5 pour caractère précédent et caractère actuel
 	
-	la $t7,tab_resultat_fonction		# chargement nb mots texte
-	lw $t7,4($t7)
+	#la $t7,tab_resultat_fonction		# chargement nb mots texte
+	#lw $t7,4($t7)
+	ori $t7,$zero,20
 	ori $t0,$zero,0				# initialisation i alias big (code C)
 	#1er for
 	grand_tour_f7:
@@ -434,9 +436,9 @@ f7_frequence_mot:
 	j for_3_f7
 	fin_for_3_f7:
 	
-	ori $a0,$a1,0				# affichage du caractère
-        ori $v0,$zero,4
-        syscall
+	#ori $a0,$a1,0				# affichage du caractère
+        #ori $v0,$zero,4
+        #syscall
         
 	while_1_f7:
 	ori $t3,$zero,0x21			# caract '!'
@@ -484,17 +486,17 @@ f7_frequence_mot:
         addi $t4,$t4,1				# loop ++
         sw $t4,0($t3)
         
-        ori $a0,$a1,0				# affichage du caractère
-        ori $v0,$zero,4
-        syscall
+        #ori $a0,$a1,0				# affichage du caractère
+        #ori $v0,$zero,4
+        #syscall
         
 	j while_1_f7
    	
 	fin_while_1_f7:
 
-	la $a0,texte_while_1			#afficher le texte nbr lignes
-    	ori $v0,$zero,4
-        syscall
+	#la $a0,texte_while_1			#afficher le texte nbr lignes
+    	#ori $v0,$zero,4
+        #syscall
 
 
 	#ATTENTION S4 UTILISE POUR LE FICHIER2
@@ -596,9 +598,9 @@ f7_frequence_mot:
 	fin_for_3_partie2_f7:
 	
 	
-	ori $a0,$a1,0				# affichage du caractère
-        ori $v0,$zero,4
-        syscall
+	#ori $a0,$a1,0				# affichage du caractère
+        #ori $v0,$zero,4
+        #syscall
 	
 	while_2_f7:
 	ori $t3,$zero,0x21			# caract '!'
@@ -646,18 +648,18 @@ f7_frequence_mot:
         addi $t4,$t4,1				# loop ++
         sw $t4,0($t3)
         
-        ori $a0,$a1,0				# affichage du caractère
-        ori $v0,$zero,4
-        syscall
+        #ori $a0,$a1,0				# affichage du caractère
+        #ori $v0,$zero,4
+        #syscall
         
 
 	j while_2_f7
         
         fin_while_2_f7:
         
-        la $a0,texte_while_2			#afficher le texte nbr lignes
-    	ori $v0,$zero,4
-        syscall
+        #la $a0,texte_while_2			#afficher le texte nbr lignes
+    	#ori $v0,$zero,4
+        #syscall
         
         
         
@@ -691,10 +693,23 @@ f7_frequence_mot:
 	fin_comparaison_temp_f7:		
         
         bne $t8,$t5,comp_pas_egal_28_1_f7
-        la $t5,temp_int				# on récupère adrese temp-int
-        lw $t8,0($t5)
-        addi $t8,$t8,1
-        sw $t8,0($t5)
+        la $s3,temp_int				# on récupère adrese temp-int
+        lw $k0,0($s3)
+        addi $k0,$k0,1
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall	
+        
+        ori $a0,$k0,0
+	ori $v0,$zero,1
+	syscall
+	
+	ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall	
+        
+        sw $k0,0($s3)
         
         comp_pas_egal_28_1_f7:
         
@@ -712,6 +727,7 @@ f7_frequence_mot:
 	ori $v0,$zero,4				
         syscall
 
+	
 	fin_programme_part3:
 	li   $v0, 16       			# syscall pour fermer le fichier
   	move $a0, $s4     			# adresse fichier dans $a0 pour fermeture
@@ -1148,6 +1164,7 @@ f7_frequence_mot:
 	add $t6,$t5,$t3				# récupère adresse tabint[i]
 	lw $t6,0($t6)				# récupère valeur de l'adresse tabint[i]
 	
+	
 	#if TabInt[i] < min 
 	bge $t6,$t8,fin_if_min			# min>tabint[i] on sort
 	add $t8,$zero,$t6			# min=tabint[i]
@@ -1188,14 +1205,24 @@ f7_frequence_mot:
 	lw $t3,0($t3)				# charge la valeur de tempint
 	
 	# if existe == 1 on saute
-	ori $t4,$zero,1				# on prend la valeur 1
+	ori $t4,$zero,0				# on prend la valeur 1
 	bne $t8,$t4,fin_if_mot_existant
 
-
+	ori $a0,$t3,0
+	ori $v0,$zero,1
+	syscall
+	
+	
+	ori $a0,$zero,15
+	ori $v0,$zero,1
+	syscall
 	# if TabInt[indiceMin] < temp_int
 	add $t2,$t2,$t1				# on creer l'adresse TabInt[indiceMin]
 	lw $t2,0($t2)				# charge la valeur de TabInt[indiceMin] ¯\_(ツ)_/¯
-	bne $t2,$t3,fin_if_mot_existant		# si TabInt[indiceMin] > tempint on saute a la fin
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+	syscall
+	bge $t2,$t3,fin_if_mot_existant		# si TabInt[indiceMin] >= tempint on saute a la fin
 	
 	
 	
@@ -1500,6 +1527,11 @@ f7_frequence_mot:
 	lw $t2,0($t2)				# charge la valeur de temp_int
 	lw $t1,0($t1)				# charge la valeur de indicemin
 	
+	ori $a0,$zero,15
+	ori $v0,$zero,1
+	syscall
+	
+	
 	ori $t3,$zero,4
 	mul $t1,$t1,$t3				#indicemin *4 pour avoir la position du nouveau mot
 	add $t8,$t8,$t1				# adresse de TabInt[indiceMin]
@@ -1524,17 +1556,188 @@ f7_frequence_mot:
 	
 	
 	
-	
-	
-	
-	
-
-
-
 	addi $t0,$t0,1				# incrémentation 1er for
 	j grand_tour_f7				# retour sur le 1er for alias grand_tour
+	
+	
 	fin_programme_f7:
-	### printf
+	
+	
+	debut_dernier_for_f7:	
+	la $t4,message_final			# charge msg à afficher
+	la $t5,TabInt				# charge adresse 
+	lw $t6,0($t5)				# charge valeur de TabInt
+	
+	# temp 0
+	la $t2,temp0
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall									
+																												
+	# temp 1
+	lw $t6,4($t5)				# charge valeur de TabInt
+	la $t2,temp1
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+	
+	# temp 2
+	lw $t6,8($t5)				# charge valeur de TabInt
+	la $t2,temp2
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+	
+	# temp 3
+	lw $t6,12($t5)				# charge valeur de TabInt
+	la $t2,temp3
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+	
+	# temp 4
+	lw $t6,16($t5)				# charge valeur de TabInt
+	la $t2,temp4
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+	# temp 5
+	lw $t6,20($t5)				# charge valeur de TabInt
+	la $t2,temp5
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+	# temp 6
+	lw $t6,24($t5)				# charge valeur de TabInt
+	la $t2,temp6
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+	# temp 7
+	lw $t6,28($t5)				# charge valeur de TabInt
+	la $t2,temp7
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+	# temp 8
+	lw $t6,32($t5)				# charge valeur de TabInt
+	la $t2,temp8
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+	# temp 9
+	lw $t6,36($t5)				# charge valeur de TabInt
+	la $t2,temp9
+	lw $t2,0($t2)
+	# affichage nb de fois
+	ori $a0,$t6,0
+	ori $v0,$zero,1
+	syscall			
+	#affichage texte
+	la $a0,message_final			
+    	ori $v0,$zero,4
+        syscall
+	# affichage mot
+	ori $a0,$t2,0
+	ori $v0,$zero,1
+        syscall	
+
+
 	lw $fp,4($sp)				# epilogue
 	addu $sp,$sp,8
 	jr $ra
