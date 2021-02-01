@@ -356,11 +356,12 @@ f7_frequence_mot:
 	
 	#la $t7,tab_resultat_fonction		# chargement nb mots texte
 	#lw $t7,4($t7)
+	
 	ori $t7,$zero,20
 	ori $t0,$zero,0				# initialisation i alias big (code C)
 	#1er for
 	grand_tour_f7:
-	bge $t0,$t7,fin_programme_f7
+	#bge $t0,$t7,fin_programme_f7
 	
 	#2ème for = initialisation de temp
 	la $t6,temp				# chargement du tableau temp
@@ -393,6 +394,14 @@ f7_frequence_mot:
         la $a1,buffer				# adresse buffer
         ori $a2,$zero,1				# nombre de caractère lue
         syscall
+        
+        ######## changement
+        
+        ori $s0,$v0,0				# si V0= 0 => fin du fichier
+        beq $s0,$zero,fin_programme_f7		# on sort si c'est le dernier caractère
+        
+        
+        
         
         #erreur :ori $s7,$v0,0				# copie du caractère lu dans Caractère_précédent
         lb $s7,0($a1)
@@ -428,7 +437,7 @@ f7_frequence_mot:
         la $a1,buffer				# adresse buffer
         ori $a2,$zero,1				# nombre de caractère lue
         syscall
-        #erreur :ori $s7,$a1,0				# copie du caractère lu dans Caractère_précédent
+        #erreur :ori $s7,$a1,0			# copie du caractère lu dans Caractère_précédent
 	lb $s7,0($a1)
 	
 	suite_for_3_f7:
@@ -468,7 +477,7 @@ f7_frequence_mot:
         ori $s0,$v0,0				# si V0= 0 => fin du fichier
         beq $s0,$zero,fin_while_1_f7		# on sort si c'est le dernier caractère
         
-        #erreur :ori $s5,$a1,0				# copie du caractère lu dans caractère_actuel
+        #erreur :ori $s5,$a1,0			# copie du caractère lu dans caractère_actuel
         lb $s5,0($a1)
         
         la $t3,loop				
@@ -479,17 +488,24 @@ f7_frequence_mot:
         la $t6,temp
        	add $s1,$t6,$t5				# adresse de temp + 4*loop
         lw $s2,0($s1)				# valeur de tempchar à l'adresse 4*loop
-        addi $s2,$s7,0				# temp[loop] = caractere_actuel
+        addi $s2,$s7,0				# temp[loop] = caractere_precedent
+        
+        
+        
         sw $s2,0($s1)
         ori $s7,$s5,0				# caractere_precedent = caractere_actuel
         
         addi $t4,$t4,1				# loop ++
+        
         sw $t4,0($t3)
         
-        #ori $a0,$a1,0				# affichage du caractère
-        #ori $v0,$zero,4
-        #syscall
-        
+        ori $a0,$s1,0				# affichage du caractère
+        ori $v0,$zero,4
+        syscall
+	
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 	j while_1_f7
    	
 	fin_while_1_f7:
@@ -521,8 +537,8 @@ f7_frequence_mot:
         ori $t9,$zero,0				# initialisation i alias irr (code C)
 	#1er for
 	grand_tour_2_f7:
-	bge $t9,$t7,fin_grand_tour_2_f7
-	
+	#bge $t9,$t7,fin_grand_tour_2_f7        
+        
 	#2ème for = initialisation de temp_char
 	la $t6,temp_char			# chargement du tableau temp
 	ori $t1,$zero,0				# initialisation i alias i2 (code C)
@@ -555,6 +571,16 @@ f7_frequence_mot:
         ori $a2,$zero,1				# nombre de caractère lue
         syscall
         
+        
+	######## changement
+        
+        ori $s0,$v0,0				# si V0= 0 => fin du fichier
+        beq $s0,$zero,fin_grand_tour_2_f7		# on sort si c'est le dernier caractère
+        
+        
+        
+        
+        
         #erreur :ori $s7,$v0,0				# copie du caractère lu dans Caractère_précédent
         lb $s7,0($a1)
         
@@ -570,32 +596,6 @@ f7_frequence_mot:
 	ori $s2,$zero,0x3B			# caract ';'
 	ori $s3,$zero,0x0A			# caract '\n'
 	
-	# si ponctuation ou espace collé, on les ignore et on lie de nouveau un entier
-	for_3_partie2_f7:
-	bge $t1,$t2,fin_for_3_partie2_f7
-	#if caractère_précédent = alors on lie un nouvelle entier
-	bne $s7,$t3,suite_for_3_partie2_f7	# si != '!'
-	bne $s7,$t4,suite_for_3_partie2_f7	# si != '.'
-	bne $s7,$t5,suite_for_3_partie2_f7	# si != '?'
-	bne $s7,$t6,suite_for_3_partie2_f7	# si != ' '
-	bne $s7,$s1,suite_for_3_partie2_f7	# si != ','
-	bne $s7,$s2,suite_for_3_partie2_f7	# si != ';'
-	bne $s7,$s3,suite_for_3_partie2_f7	# si != '\n'
-	
-	# lecture caractère (fgetc)
-        li $v0,14				# code service lecture fichier
-        # chargement des paramètres
-        ori $a0,$s4,0				# adresse fichier
-        la $a1,buffer				# adresse buffer
-        ori $a2,$zero,1				# nombre de caractère lue
-        syscall
-        #erreur :ori $s7,$a1,0				# copie du caractère lu dans Caractère_précédent
-	lb $s7,0($a1)
-	
-	suite_for_3_partie2_f7:
-	addi $t1,$t1,1				# incrémentation 3eme for
-	j for_3_partie2_f7
-	fin_for_3_partie2_f7:
 	
 	
 	#ori $a0,$a1,0				# affichage du caractère
@@ -641,7 +641,7 @@ f7_frequence_mot:
         la $t6,temp_char
        	add $s1,$t6,$t5				# adresse de tempchar + 4*loop
         lw $s2,0($s1)				# valeur de tempchar à l'adresse 4*loop
-        addi $s2,$s7,0				# temp[loop] = caractere_actuel
+        addi $s2,$s7,0				# temp[loop] = caractere_precedent
         sw $s2,0($s1)
         ori $s7,$s5,0				# caractere_precedent = caractere_actuel
         
@@ -651,8 +651,10 @@ f7_frequence_mot:
         #ori $a0,$a1,0				# affichage du caractère
         #ori $v0,$zero,4
         #syscall
-        
-
+        ori $a0,$s1,0				# affichage du caractère
+        ori $v0,$zero,4
+        syscall
+	
 	j while_2_f7
         
         fin_while_2_f7:
@@ -685,7 +687,18 @@ f7_frequence_mot:
 	bne $s1,$s2,suite_comparaison_temp_f7
 	addi $t8,$t8,1				# comp ++
 	
-
+       	#ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	#ori $v0,$zero,11
+        #syscall
+        
+        #ori $a0,$t8,0			# affichage saut de ligne	
+    	#ori $v0,$zero,1
+        #syscall
+        
+        #ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	#ori $v0,$zero,11
+        #syscall
+        
 	suite_comparaison_temp_f7:
 	addi $t1,$t1,1				# incrémentation
 	j comparaison_temp_f7			
@@ -697,17 +710,17 @@ f7_frequence_mot:
         lw $k0,0($s3)
         addi $k0,$k0,1
         
-        ori $a0,$zero,0x0A			# affichage saut de ligne	
-    	ori $v0,$zero,11
-        syscall	
+        #ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	#ori $v0,$zero,11
+        #syscall	
         
-        ori $a0,$k0,0
-	ori $v0,$zero,1
-	syscall
+        #ori $a0,$k0,0
+	#ori $v0,$zero,1
+	#syscall
 	
-	ori $a0,$zero,0x0A			# affichage saut de ligne	
-    	ori $v0,$zero,11
-        syscall	
+	#ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	#ori $v0,$zero,11
+        #syscall	
         
         sw $k0,0($s3)
         
@@ -1208,20 +1221,22 @@ f7_frequence_mot:
 	ori $t4,$zero,0				# on prend la valeur 1
 	bne $t8,$t4,fin_if_mot_existant
 
-	ori $a0,$t3,0
-	ori $v0,$zero,1
-	syscall
+	#ori $a0,$t3,0
+	#ori $v0,$zero,1
+	#syscall
 	
 	
-	ori $a0,$zero,15
-	ori $v0,$zero,1
-	syscall
+	#ori $a0,$zero,15
+	#ori $v0,$zero,1
+	#syscall
 	# if TabInt[indiceMin] < temp_int
 	add $t2,$t2,$t1				# on creer l'adresse TabInt[indiceMin]
 	lw $t2,0($t2)				# charge la valeur de TabInt[indiceMin] ¯\_(ツ)_/¯
-	ori $a0,$t2,0
-	ori $v0,$zero,1
-	syscall
+	
+	#ori $a0,$t2,0
+	#ori $v0,$zero,1
+	#syscall
+	
 	bge $t2,$t3,fin_if_mot_existant		# si TabInt[indiceMin] >= tempint on saute a la fin
 	
 	
@@ -1527,9 +1542,9 @@ f7_frequence_mot:
 	lw $t2,0($t2)				# charge la valeur de temp_int
 	lw $t1,0($t1)				# charge la valeur de indicemin
 	
-	ori $a0,$zero,15
-	ori $v0,$zero,1
-	syscall
+	#ori $a0,$zero,15
+	#ori $v0,$zero,1
+	#syscall
 	
 	
 	ori $t3,$zero,4
@@ -1543,13 +1558,16 @@ f7_frequence_mot:
 	#---- reinitialisation des variable
 	la $t8,min				# chargement adresse min , existe , temp_int
 	la $t1,existe
-	la $t2,temp_int
+	la $t2,temp_int	
 	
 	ori $t3,$zero,999			#on va reinitialiser min a 999
 	sw $t3,0($t8)
 	
 	ori $t3,$zero,0			#on va reinitialiser existe a 0
 	sw $t3,0($t1)
+	
+	
+	
 	
 	ori $t3,$zero,0			#on va reinitialiser temp_int a 0
 	sw $t3,0($t2)
@@ -1570,7 +1588,7 @@ f7_frequence_mot:
 	
 	# temp 0
 	la $t2,temp0
-	lw $t2,0($t2)
+	#lw $t2,0($t2)
 	# affichage nb de fois
 	ori $a0,$t6,0
 	ori $v0,$zero,1
@@ -1579,15 +1597,16 @@ f7_frequence_mot:
 	la $a0,message_final			
     	ori $v0,$zero,4
         syscall
+
 	# affichage mot
 	ori $a0,$t2,0
-	ori $v0,$zero,1
+	ori $v0,$zero,4
         syscall									
 																												
 	# temp 1
 	lw $t6,4($t5)				# charge valeur de TabInt
 	la $t2,temp1
-	lw $t2,0($t2)
+	#lw $t2,0($t2)
 	# affichage nb de fois
 	ori $a0,$t6,0
 	ori $v0,$zero,1
@@ -1598,13 +1617,13 @@ f7_frequence_mot:
         syscall
 	# affichage mot
 	ori $a0,$t2,0
-	ori $v0,$zero,1
+	ori $v0,$zero,4
         syscall	
 	
 	# temp 2
 	lw $t6,8($t5)				# charge valeur de TabInt
 	la $t2,temp2
-	lw $t2,0($t2)
+	#lw $t2,0($t2)
 	# affichage nb de fois
 	ori $a0,$t6,0
 	ori $v0,$zero,1
@@ -1615,13 +1634,13 @@ f7_frequence_mot:
         syscall
 	# affichage mot
 	ori $a0,$t2,0
-	ori $v0,$zero,1
+	ori $v0,$zero,4
         syscall	
 	
 	# temp 3
 	lw $t6,12($t5)				# charge valeur de TabInt
 	la $t2,temp3
-	lw $t2,0($t2)
+	#lw $t2,0($t2)
 	# affichage nb de fois
 	ori $a0,$t6,0
 	ori $v0,$zero,1
@@ -1632,13 +1651,13 @@ f7_frequence_mot:
         syscall
 	# affichage mot
 	ori $a0,$t2,0
-	ori $v0,$zero,1
+	ori $v0,$zero,4
         syscall	
 	
 	# temp 4
 	lw $t6,16($t5)				# charge valeur de TabInt
 	la $t2,temp4
-	lw $t2,0($t2)
+	#lw $t2,0($t2)
 	# affichage nb de fois
 	ori $a0,$t6,0
 	ori $v0,$zero,1
@@ -1649,9 +1668,9 @@ f7_frequence_mot:
         syscall
 	# affichage mot
 	ori $a0,$t2,0
-	ori $v0,$zero,1
+	ori $v0,$zero,4
         syscall	
-
+	
 	# temp 5
 	lw $t6,20($t5)				# charge valeur de TabInt
 	la $t2,temp5
