@@ -46,6 +46,9 @@ min:				.word 999
 indiceMin:			.word 0
 comp:				.word 0
 freq_lettre:			.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+compteur_caractere:		.word 0
+compteur_lettre:		.word 0
     .text
 main:
 	subu $sp,$sp,8    			# prologue
@@ -535,7 +538,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # j
+ 	# j
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -557,7 +560,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # k
+ 	# k
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -579,7 +582,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # l
+ 	# l
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -601,7 +604,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # m
+ 	# m
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -623,7 +626,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # n
+ 	# n
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -645,7 +648,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # o
+ 	# o
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -667,7 +670,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # p
+ 	# p
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -689,7 +692,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # q
+ 	# q
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -711,7 +714,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # r
+ 	# r
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -733,7 +736,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # s
+ 	# s
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -755,7 +758,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
- # t
+	# t
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -777,7 +780,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# u
+	# u
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -799,7 +802,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# v
+	# v
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -821,7 +824,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# w
+	# w
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -843,7 +846,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# x
+	# x
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -865,7 +868,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# y
+	# y
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -887,7 +890,7 @@ f6_affichage_resultat:
     	ori $v0,$zero,11
         syscall	
 
-# Z
+	# z
         la $a0,il_y_a				#affiche message il_y_a
     	ori $v0,$zero,4
         syscall
@@ -1050,8 +1053,7 @@ f7_freq_lettres:
 	ori $t1,$zero,0x5A			# caractere Z
 	beq $s5,$t0,compteur_freq_z
 	beq $s5,$t1,compteur_freq_z
-	
-	
+
 	j fin_programme_frq_ltr	
 	
 	compteur_freq_a:
@@ -1687,11 +1689,8 @@ f7_frequence_mot:
 	
 	fin_if_comp2:
 	# fin de for comparaison 2
-	
-	
-	
-	
-		#----for comparaison 3
+
+	# for comparaison 3
 	ori $t8,$zero,0				# initialisation comp a 0
 	ori $t1,$zero,0				# initialisation i 
 	addi $t2,$zero,28			# nb éléments de temp = 28
@@ -1727,10 +1726,7 @@ f7_frequence_mot:
 	
 	fin_if_comp3:
 	# fin de for comparaison 3
-	
-	
-	
-	#----for comparaison 4
+	# for comparaison 4
 	ori $t8,$zero,0				# initialisation comp a 0
 	ori $t1,$zero,0				# initialisation i 
 	addi $t2,$zero,28			# nb éléments de temp = 28
@@ -2318,6 +2314,10 @@ f7_frequence_mot:
 	la $t5,TabInt				# charge adresse 
 	lw $t6,0($t5)				# charge valeur de TabInt
 	
+	ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
+	
 	# temp 0
 	la $t2,temp0
 	# affichage nb de fois
@@ -2332,7 +2332,11 @@ f7_frequence_mot:
 	# affichage mot
 	ori $a0,$t2,0
 	ori $v0,$zero,4
-        syscall									
+        syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall																
 																												
 	# temp 1
 	lw $t6,4($t5)				# charge valeur de TabInt
@@ -2349,6 +2353,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 	
 	# temp 2
 	lw $t6,8($t5)				# charge valeur de TabInt
@@ -2365,6 +2373,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 	
 	# temp 3
 	lw $t6,12($t5)				# charge valeur de TabInt
@@ -2381,6 +2393,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 	
 	# temp 4
 	lw $t6,16($t5)				# charge valeur de TabInt
@@ -2397,6 +2413,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 	
 	# temp 5
 	lw $t6,20($t5)				# charge valeur de TabInt
@@ -2413,6 +2433,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 
 	# temp 6
 	lw $t6,24($t5)				# charge valeur de TabInt
@@ -2429,6 +2453,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 
 	# temp 7
 	lw $t6,28($t5)				# charge valeur de TabInt
@@ -2445,6 +2473,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 
 	# temp 8
 	lw $t6,32($t5)				# charge valeur de TabInt
@@ -2462,6 +2494,10 @@ f7_frequence_mot:
 	ori $v0,$zero,4
         syscall	
 
+	ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
+
 	# temp 9
 	lw $t6,36($t5)				# charge valeur de TabInt
 	la $t2,temp9
@@ -2476,6 +2512,10 @@ f7_frequence_mot:
 	ori $a0,$t2,0
 	ori $v0,$zero,4
         syscall	
+        
+        ori $a0,$zero,0x0A			# affichage saut de ligne	
+    	ori $v0,$zero,11
+        syscall
 
 	lw $fp,4($sp)				# epilogue
 	addu $sp,$sp,8
